@@ -1,0 +1,81 @@
+工作区：电脑里看到的目录
+暂存区：一般存放在.git目录下的index文件
+版本库：工作区下隐藏目录.git
+
+git创建仓库
+使用当前目录作为git仓库，只需初始化 git init
+使用指定目录作为git 仓库 git init newrepo 
+初始化后都会生成一个.git文件
+使用 git clone 从现有 Git 仓库中拷贝项目（类似 svn checkout）
+git clone <repo>克隆仓库的命令格式
+git clone <repo> <directory>    <repo>git仓库 <directory>本地目录
+
+比如，要克隆 Ruby 语言的 Git 代码仓库 Grit，可以用下面的命令：
+$ git clone git://github.com/schacon/grit.git
+执行该命令后，会在当前目录下创建一个名为grit的目录，其中包含一个 .git 的目录，用于保存下载下来的所有版本记录。
+如果要自己定义要新建的项目目录名称，可以在上面的命令末尾指定新的名字：
+$ git clone git://github.com/schacon/grit.git mygrit
+
+git clone [url] 克隆github项目
+Git 的工作就是创建和保存你的项目的快照及与之后的快照进行对比
+
+git add 命令可将该文件添加到缓存，如我们添加以下两个文件：
+git add gong ya.php
+git status 命令用于查看,是否添加上了。 -s 参数，以获得简短的结果输出
+ vim  添加和修改文件 在 README 添加内容后：# Runoob Git 测试，
+
+git diff 命令显示已写入缓存与已修改但尚未写入缓存的改动的区别。git diff 有两个主要的应用场景。
+尚未缓存的改动：git diff
+查看已缓存的改动： git diff --cached
+查看已缓存的与未缓存的所有改动：git diff HEAD
+显示摘要而非整个 diff：git diff --stat
+
+git status 显示你上次提交更新后的更改或者写入缓存的改动， 而 git diff 一行一行地显示这些改动具体是啥。
+
+使用 git add 命令将想要快照的内容写入缓存区， 而执行 git commit 将缓存区内容添加到仓库中
+Git 为你的每一个提交都记录你的名字与电子邮箱地址，所以第一步需要配置用户名和邮箱地址。
+$ git config --global user.name 'runoob'$ git config --global user.email test@runoob.com
+
+接下来我们写入缓存，并提交对 hello.php 的所有改动。在首个例子中，我们使用 -m 选项以在命令行中提供提交注释。
+$ git add hello.php
+$ git status -s
+A  README
+A  hello.php
+$ $ git commit -m '第一次版本提交'[master (root-commit) d32cf1f] 第一次版本提交
+如果你觉得 git add 提交缓存的流程太过繁琐，Git 也允许你用 -a 选项跳过这一步。命令格式如下：
+git commit -a
+git commit -am 直接将修改的文件写入库中
+git reset HEAD 命令用于取消已缓存的内容。
+简而言之，执行 git reset HEAD 以取消之前 git add 添加，但不希望包含在下一提交快照中的缓存。
+
+默认情况下，git rm file 会将文件从缓存区和你的硬盘中（工作目录）删除。
+如果你要在工作目录中留着该文件，可以使用 git rm --cached
+git mv 重命名
+git 分支管理
+创建分支命令：git branch (branchname)
+切换分支命令:git checkout (branchname)
+当你切换分支的时候，Git 会用该分支的最后提交的快照替换你的工作目录的内容， 所以多个分支不需要多个目录。
+
+合并分支命令:git merge
+你可以多次合并到统一分支， 也可以选择在合并之后直接删除被并入的分支
+ 列出分支：git branch 没有参数时，会列出该分支的 当前 的分支
+git branch* master 
+
+ git checkout -b (branchname) 创建分支后立即切换到该分支下 -b
+git branch -d (branchname) 删除分支
+git log 查看提交历史
+我们可以用 --oneline 选项来查看历史记录的简洁的版本。
+$ git log --oneline
+用 --graph 选项，查看历史中什么时候出现了分支、合并。以下为相同的命令，开启了拓扑图选项：
+$ git log --oneline --graph* 
+用 '--reverse'参数来逆向显示所有日志。
+$ git log --reverse 
+如果只想查找指定用户的提交日志可以使用命令：git log --author , 例如，比方说我们要找 Git 源码中 Linus 提交的部分：
+$ git log --author=Linus --oneline
+如果你要指定日期，可以执行几个选项：--since 和 --before，但是你也可以用 --until 和 --after。
+例如，如果我要看 Git 项目中三周前且在四月十八日之后的所有提交，我可以执行这个（我还用了 --no-merges 选项以隐藏合并提交）：
+$ git log --oneline --before={3.weeks.ago} --after={2010-04-18} --no-merges5469e2d Git 1.7.1-rc2
+git tag -a //发布
+如果你要指定日期，可以执行几个选项：--since 和 --before，但是你也可以用 --until 和 --after。
+例如，如果我要看 Git 项目中三周前且在四月十八日之后的所有提交，我可以执行这个（我还用了 --no-merges 选项以隐藏合并提交）：
+$ git log --oneline --before={3.weeks.ago} --after={2010-04-18} --no-merges5469e2d Git 1.7.1-rc2
